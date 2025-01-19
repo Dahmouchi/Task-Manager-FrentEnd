@@ -19,4 +19,4 @@ A simple task manager application built with **React.js** to help users manage t
 
 1. Clone the repository:
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/Dahmouchi/Task-Manager-FrentEnd.git
