@@ -4,6 +4,7 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import Breadcrumb from "../../components/Breadcrumb";
 import { toast } from "react-toastify";
+import { Delete, DeleteIcon, Trash, X } from "lucide-react";
 
 const ModifyProject = () => {
   const { id } = useParams(); // Extract the task ID from the URL
@@ -70,6 +71,23 @@ const ModifyProject = () => {
       console.error(error);
     }
   };
+  const handleTaskDelete = async (id) => {
+    try {
+      // Make the DELETE request
+      const res = await axios.delete(`http://localhost:9090/tasks/${id}`);
+  
+      // Check response and refresh
+      if (res.status === 200) {
+        toast.success("Task deleted successfully");
+        setControle((prev) => !prev); // Toggle the controle state to refresh
+      }
+    } catch (error) {
+      setMessage("Error deleting task.");
+      console.error("Error deleting task:", error.message);
+      toast.error("Failed to delete the task.");
+    }
+  };
+  
   function extractDate(timestamp) {
     const date = new Date(timestamp); // Parse the timestamp
     const year = date.getFullYear();
@@ -138,8 +156,12 @@ const ModifyProject = () => {
             {task?.map((task) => (
               <li key={task.id} className="mb-4 w-72">
                 <div
-                  className={`flex flex-col justify-between h-44 border rounded-lg p-4 shadow-lg bg-gray-50 hover:shadow-xl transition-transform duration-300 cursor-pointer`}
+                  className={`flex flex-col justify-between h-44 border rounded-lg p-x shadow-lg bg-gray-50 hover:shadow-xl transition-transform duration-300 cursor-pointer`}
                 >
+                    <div className="flex justify-between items-center">
+                        <div></div>
+                        <div onClick={()=>handleTaskDelete(task.idTask)} className="bg-red-500 rounded-full p-1 "><X className="text-white w-5 h-auto"/></div>
+                    </div>
                   {/* Task Header */}
                   <div className="flex items-center justify-between ">
                     <h3 className="text-lg font-semibold text-gray-800 truncate">
