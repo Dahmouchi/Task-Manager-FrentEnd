@@ -6,9 +6,11 @@ import MultiSelector from "../../components/Multiselector";
 import { toast } from "react-toastify";
 import Breadcrumb from "../../components/Breadcrumb";
 import Loading from "../../components/Loading";
+import { useNavigate } from "react-router-dom";
 
 const AddProject = () => {
 const [tasks, setTasks] = useState([]);
+const navigate = useNavigate();
   const [taskTitle, setTaskTitle] = useState("");
   const [taskDescription, setTaskDescription] = useState("");
   const [taskUser, setTaskUser] = useState("");
@@ -82,8 +84,8 @@ const [tasks, setTasks] = useState([]);
 
   
   const handleChange = (selected) => {
-    const selectedValues = selected.map((item) => item.value); // Extract values from selected
-    setSelectedUser(selectedValues); // Store the values
+    const selectedValues = selected.map((item) => item.value);
+    setSelectedUser(selectedValues);
     console.log(selectedValues);
   };
   
@@ -116,13 +118,15 @@ const [tasks, setTasks] = useState([]);
       title: formData.title,
       description: formData.description,
       idAdmin:formData.idAdmin,
-      membersList:[1,2,3]
+      membersList:selectedUser
     };
     try {
       const res = await axios.post("http://localhost:9094/project",projectData)
-      if(res.status===200){
+      if(res.status===201){
         toast.success("the project created");
-        setLoading(false)
+        setLoading(false);
+        navigate(`/dashboard/tasks/${res.data.id}`)
+        
       }else{
         toast.error("erro when creating the project")
         setLoading(false)
@@ -187,19 +191,15 @@ const [tasks, setTasks] = useState([]);
           Select the users
         </label>
         <MultiSelector
-          defaultCategories={[]}
-          categories={users}
-          onChange={handleChange}
-        />
-        <button
-          type="submit"
-          className="mt-4 bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition"
-        >
-          Ajouter Tâche
-        </button>
+      categories={users}
+      onChange={handleChange}
+    />
+       
       </form>
 
-      {/* Formulaire pour Ajouter des Tâches 
+      
+
+      {/* Liste des Tâches
       <div className="bg-white p-6 rounded-lg shadow-md mb-8">
         <h2 className="text-xl font-semibold text-gray-700 mb-4">
           Ajouter une Tâche
@@ -248,9 +248,7 @@ const [tasks, setTasks] = useState([]);
         >
           Ajouter Tâche
         </button>
-      </div>*/}
-
-      {/* Liste des Tâches
+      </div>
       <div className="bg-white p-6 rounded-lg shadow-md mb-8">
         <h2 className="text-xl font-semibold text-gray-700 mb-4">Tâches</h2>
         {tasks.length > 0 ? (
@@ -276,7 +274,7 @@ const [tasks, setTasks] = useState([]);
         ) : (
           <p className="text-gray-500">Aucune tâche ajoutée.</p>
         )}
-      </div> */}
+      </div>
 
       {/* Bouton Soumettre */}
       <button
