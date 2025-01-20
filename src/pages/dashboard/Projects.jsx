@@ -87,7 +87,7 @@ const Projects = () => {
                   {pr?.membersList?.length}
               </td>
               <td className="px-6 py-4 text-right">
-                  <a href="#" className="font-medium text-blue-600  hover:underline">Edit</a>
+                  <a href={`/dashboard/tasks/${pr.id}`} className="font-medium text-blue-600  hover:underline">Edit</a>
               </td>
           </tr>
             ))
