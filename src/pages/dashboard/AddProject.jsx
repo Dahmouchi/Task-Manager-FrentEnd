@@ -149,7 +149,7 @@ const navigate = useNavigate();
         <div className="text-2xl font-bold"> Créer un Projet</div>
         <Breadcrumb item=" Créer un Projet"/>
       </div>
-    <div className="min-h-screen bg-gray-50 p-6 rounded-lg">
+    <div className=" bg-gray-50 p-6 rounded-lg">
        
      
       {/* Formulaire de Projet */}
@@ -277,12 +277,14 @@ const navigate = useNavigate();
       </div>
 
       {/* Bouton Soumettre */}
+      <div className="w-full flex justify-end">
       <button
         onClick={handleSubmitProject}
         className="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition"
       >
         Soumettre le Projet
       </button>
+      </div>
     </div></>
   )
 }

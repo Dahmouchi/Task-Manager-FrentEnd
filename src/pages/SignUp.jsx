@@ -4,147 +4,173 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const SignUp = () => {
-    const [formData, setFormData] = useState({
-        username: "",
-        password: "",
-        nom: "",
-        age: "",
-        ville: ""
-    });
-    const navigate = useNavigate();
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData((prevData) => ({
-            ...prevData,
-            [name]: value,
-        }));
-    };
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        try {
-            const response = await axios.post("http://localhost:9099/auth/register", formData);
-            if(response.status === 200 ){
-                toast.success("register user successfly")
-                navigate("/login")
-                setFormData({
-                    nom:"",
-                    ville:"",
-                    age:"",
-                    username:"",
-                    password:"",
-                })
-            }else{
-                toast.error("Failed to register user");
-                
-            }
-        } catch (error) {
-            console.error("Error registering user:", error);
-            toast.error("Failed to register user");
-        }    
-    };
+  const [formData, setFormData] = useState({
+    username: "",
+    password: "",
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+  });
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post(
+        "http://localhost:9091/api/auth/signup",
+        formData
+      );
+      if (response.status === 200) {
+        toast.success("register user successfly");
+        navigate("/login");
+        setFormData({
+          username: "",
+          password: "",
+          firstName: "",
+          lastName: "",
+          email: "",
+          phone: "",
+        });
+      } else {
+        toast.error("Failed to register user");
+        setError(response.data)
+      }
+    } catch (error) {
+      console.error("Error registering user:", error);
+      toast.error("Failed to register user");
+    }
+  };
   return (
-    <div className="min-h-screen bg-gray-100 text-gray-900 flex justify-center">
-      <div className="max-w-screen-xl m-0 sm:m-10 bg-white shadow sm:rounded-lg flex justify-center flex-1">
-      <div className="flex-1 bg-indigo-50 text-center hidden lg:flex">
-          <div
-            className="m-12 xl:m-16 w-full bg-contain bg-center bg-no-repeat" 
-            style={{ backgroundImage: 'url("/signup.png")' }}
-          ></div>
-        </div>
-        <div className="lg:w-1/2 xl:w-5/12 p-4 sm:p-8">
-          <div>
-            <img src="/logo.png" className="w-44 mx-auto" />
-          </div>
-          <div className="flex flex-col items-center">
-            <h1 className="text-2xl xl:text-3xl font-extrabold my-4">Sign up</h1>
-            <div className="w-full flex-1">
-              <form onSubmit={handleSubmit} className="mx-auto max-w-xs flex flex-col gap-2">
+    <section
+      className="bg-center min-h-screen bg-no-repeat bg-gray-700 bg-cover bg-blend-multiply"
+      style={{ backgroundImage: 'url("/background3.jpg")' }}
+    >
+      <div className=" py-8  md:h-screen lg:py-0 w-full lg:flex flex-col items-center justify-center">
+        <div className=" mb-6 text-2xl font-semibold text-slate-900 dark:text-white flex items-center justify-center"></div>
+        <div className="w-full  bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-xl xl:p-0 dark:bg-slate-800 dark:border-slate-700">
+          <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
+            <h1 className="text-xl text-center font-bold leading-tight tracking-tight text-slate-900 md:text-2xl dark:text-white">
+              Sign Up
+            </h1>
+            <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
+            <div>
+                <label
+                  htmlFor="email"
+                  className="block mb-2 text-sm font-medium text-slate-900 dark:text-white"
+                >
+                  Email
+                </label>
                 <input
-                  className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
-                  type="text"
-                  placeholder="Name"
-                  name="nom"
-                  value={formData.nom}
-                    onChange={handleChange}
-                    required
-                />
-                <input
-                  className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
-                  type="text"
-                  placeholder="Ville"
-                  name="ville"
-                  value={formData.ville}
+                  value={formData.email}
                   onChange={handleChange}
+                  type="text"
+                  name="email"
+                  id="email"
+                  className="bg-slate-50 border border-slate-300 text-slate-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-slate-700 dark:border-slate-600 dark:placeholder-slate-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  placeholder="enter your email ..."
                   required
                 />
+              </div>
+             <div className="flex flex-row items-center w-full gap-2">
+             <div className="w-full">
+                <label
+                  htmlFor="email"
+                  className="block mb-2 text-sm font-medium text-slate-900 dark:text-white"
+                >
+                  FirstName
+                </label>
                 <input
-                  className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
                   type="text"
-                  placeholder="UserName"
-                  name="username"
+                  placeholder="enter you firstName ..."
+                  name="firstName"
+                  value={formData.nom}
+                  onChange={handleChange}
+                  required
+                  className="bg-slate-50 border border-slate-300 text-slate-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-slate-700 dark:border-slate-600 dark:placeholder-slate-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                />
+              </div>
+              <div className="w-full">
+                <label
+                  htmlFor="email"
+                  className="block mb-2 text-sm font-medium text-slate-900 dark:text-white"
+                >
+                  LastName
+                </label>
+                <input
+                  type="text"
+                  placeholder="enter your lastName ..."
+                  name="lastName"
+                  value={formData.nom}
+                  onChange={handleChange}
+                  required
+                  className="bg-slate-50 border border-slate-300 text-slate-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-slate-700 dark:border-slate-600 dark:placeholder-slate-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                />
+              </div>
+             </div>
+             
+              <div>
+                <label
+                  htmlFor="email"
+                  className="block mb-2 text-sm font-medium text-slate-900 dark:text-white"
+                >
+                  Your Username
+                </label>
+                <input
                   value={formData.username}
                   onChange={handleChange}
+                  type="text"
+                  name="username"
+                  id="username"
+                  className="bg-slate-50 border border-slate-300 text-slate-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-slate-700 dark:border-slate-600 dark:placeholder-slate-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  placeholder="enter your username ..."
                   required
                 />
+              </div>
+              <div>
+                <label
+                  htmlFor="password"
+                  className="block mb-2 text-sm font-medium text-slate-900 dark:text-white"
+                >
+                  Password
+                </label>
                 <input
-                  className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
-                  type="number"
-                  placeholder="age"
-                  name="age"
-
-                  value={formData.age}
-                  onChange={handleChange}
-                  required
-                />
-
-                <input
-                  className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
-                  type="password"
-                  placeholder="Password"
                   value={formData.password}
-                onChange={handleChange}
-                required
-                name="password"
-
+                  onChange={handleChange}
+                  type="password"
+                  name="password"
+                  id="password"
+                  placeholder="••••••••"
+                  className="bg-slate-50 border border-slate-300 text-slate-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-slate-700 dark:border-slate-600 dark:placeholder-slate-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  required
                 />
-                <button type="submit" className=" tracking-wide font-semibold bg-indigo-500 text-gray-100 w-full py-4 rounded-lg hover:bg-indigo-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none">
-                  <svg
-                    className="w-6 h-6 -ml-2"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
-                    <circle cx="8.5" cy="7" r="4" />
-                    <path d="M20 8v6M23 11h-6" />
-                  </svg>
-                  <span className="ml-3">Sign Up</span>
-                </button>
-                <p className="mt-6 text-xs text-gray-600 text-center">
-                  I agree to abide by templatana's
-                  <a
-                    href="#"
-                    className="border-b border-gray-500 border-dotted"
-                  >
-                    Terms of Service
-                  </a>
-                  and its
-                  <a
-                    href="#"
-                    className="border-b border-gray-500 border-dotted"
-                  >
-                    Privacy Policy
-                  </a>
-                </p>
-              </form>
-            </div>
+              </div>
+              <div className="flex items-center justify-between"></div>
+              {error && <p style={{ color: "red" }}>{error}</p>}
+              <button
+                type="submit"
+                className="w-full text-white bg-purple-800 hover:bg-purple-600 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+              >
+                Sign in
+              </button>
+            </form>
+            <p className="text-slate-200 text-center">
+            Already a member? {" "}
+              <a href="/login" className="font-semibold text-blue-600">
+              Log in
+              </a>
+            </p>
           </div>
         </div>
-       
-      </div>
-    </div>
+      </div>  
+    </section>
   );
 };
 

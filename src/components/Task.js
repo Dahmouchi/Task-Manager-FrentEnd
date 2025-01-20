@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { DndProvider, useDrag, useDrop } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 
@@ -11,9 +12,9 @@ const TaskCard = ({ task, handleDrop }) => {
     }),
   }));
   const statusColor = {
-    TODO: "bg-blue-500",
-    IN_PROGRESS: "bg-yellow-500",
-    DONE: "bg-green-500",
+    todo: "bg-blue-500",
+    in_progress: "bg-yellow-500",
+    done: "bg-green-500",
   };
   return (
     <div
@@ -33,7 +34,7 @@ const TaskCard = ({ task, handleDrop }) => {
         </span>
       </div>
       <p className="text-gray-600 mt-2">{task.description}</p>
-      <p className="text-sm text-gray-500 mt-1">Assigned to: {task.user}</p>
+      <p className="text-sm text-gray-500 mt-1">Assigned to: {task?.user?.firstName} {task?.user?.LastName}</p>
     </div>
   );
 };
@@ -64,39 +65,50 @@ const Column = ({ status, tasks, onTaskDrop }) => {
   );
 };
 
-const TaskBoard = () => {
-  const [tasks, setTasks] = useState([
-    {
-      idTask: 1,
-      title: "Complete project setup",
-      description: "Initialize repository and project structure",
-      status: "TODO",
-      user: "John Doe",
-    },
-    {
-      idTask: 2,
-      title: "Design UI",
-      description: "Create wireframes and design prototypes",
-      status: "IN_PROGRESS",
-      user: "Jane Smith",
-    },
-    {
-      idTask: 3,
-      title: "Implement backend",
-      description: "Develop APIs for task management",
-      status: "DONE",
-      user: "Alice Johnson",
-    },
-  ]);
+const TaskBoard = ({ projectId }) => {
+  const statuses = ["todo", "in_progress", "done"];
+  const [tasks, setTasks] = useState([]);
 
-  const statuses = ["TODO", "IN_PROGRESS", "DONE"];
+  useEffect(() => {
+    const fetchTasks = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:9090/tasks/project/${projectId}`
+        );
+        setTasks(response.data);
+      } catch (error) {
+        console.error("Error fetching tasks:", error);
+      }
+    };
 
-  const handleTaskDrop = (idTask, newStatus) => {
-    setTasks((prevTasks) =>
-      prevTasks.map((task) =>
-        task.idTask === idTask ? { ...task, status: newStatus } : task
-      )
-    );
+    if (projectId) {
+      fetchTasks();
+    }
+  }, [projectId]);
+
+  const handleTaskDrop = async (idTask, newStatus) => {
+    try {
+      // Optimistic UI update
+      setTasks((prevTasks) =>
+        prevTasks.map((task) =>
+          task.idTask === idTask ? { ...task, status: newStatus } : task
+        )
+      );
+
+      // Update the task in the backend
+      await axios.put(`http://localhost:9090/tasks/${idTask}/status`, {
+        status: newStatus,
+      });
+    } catch (error) {
+      console.error("Error updating task status:", error);
+
+      // Rollback UI update if API call fails
+      setTasks((prevTasks) =>
+        prevTasks.map((task) =>
+          task.idTask === idTask ? { ...task, status: task.status } : task
+        )
+      );
+    }
   };
 
   return (

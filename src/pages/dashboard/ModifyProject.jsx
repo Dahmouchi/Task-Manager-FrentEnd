@@ -98,7 +98,7 @@ const ModifyProject = () => {
   }
   const statusColor = {
     todo: "bg-blue-500",
-    IN_PROGRESS: "bg-yellow-500",
+    in_progress: "bg-yellow-500",
     done: "bg-green-500",
   };
   if (loading) {
@@ -112,8 +112,8 @@ const ModifyProject = () => {
         <Breadcrumb item="Modifier un Projet" />
       </div>
       <div className="w-full mx-auto p-4 bg-white shadow-md rounded-md">
-        <h1 className="text-2xl font-bold mb-2">{project.title}</h1>
-        <p className="text-gray-700 mb-4">{project.description}</p>
+        <h1 className="text-2xl font-bold mb-2">{project?.title}</h1>
+        <p className="text-gray-700 mb-4">{project?.description}</p>
 
         <div className="mb-8">
           <h2 className="text-xl font-semibold mb-2">Users</h2>
@@ -156,24 +156,18 @@ const ModifyProject = () => {
             {task?.map((task) => (
               <li key={task.id} className="mb-4 w-72">
                 <div
-                  className={`flex flex-col justify-between h-44 border rounded-lg p-x shadow-lg bg-gray-50 hover:shadow-xl transition-transform duration-300 cursor-pointer`}
+                  className={`flex flex-col p-2 border rounded-lg p-x shadow-lg bg-gray-50 hover:shadow-xl transition-transform duration-300 cursor-pointer`}
                 >
                     <div className="flex justify-between items-center">
                         <div></div>
-                        <div onClick={()=>handleTaskDelete(task.idTask)} className="bg-red-500 rounded-full p-1 "><X className="text-white w-5 h-auto"/></div>
+                        <div onClick={()=>handleTaskDelete(task.idTask)} className=" rounded-full p-1 "><X className="text-slate-500 w-5 h-auto"/></div>
                     </div>
                   {/* Task Header */}
                   <div className="flex items-center justify-between ">
                     <h3 className="text-lg font-semibold text-gray-800 truncate">
                       {task?.title}
                     </h3>
-                    <span
-                      className={`text-xs px-3 py-1 rounded-full text-white font-medium ${
-                        statusColor[task?.status]
-                      }`}
-                    >
-                      {task?.status}
-                    </span>
+                    
                   </div>
 
                   {/* Task Description */}
@@ -183,12 +177,22 @@ const ModifyProject = () => {
                   <p className="text-sm text-gray-600">{task?.description}</p>
 
                   {/* Task Footer */}
+                  <div className="flex justify-between items-center">
                   <p className="text-xs text-gray-500">
                     Assigned to:{" "}
                     <span className="text-gray-700 font-medium">
                       {task.user?.firstName} {task.user?.lastName}
                     </span>
                   </p>
+                  <span
+                      className={`text-xs px-3 py-1 rounded-full text-white font-medium ${
+                        statusColor[task?.status]
+                      }`}
+                    >
+                      {task?.status}
+                    </span>
+                  </div>
+                  
                 </div>
               </li>
             ))}

@@ -13,9 +13,21 @@ const Projects = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
+        const token = localStorage.getItem("authToken");
+
+        if (!token) {
+          console.error("No auth token found in local storage.");
+          return;
+        }
         setLoading(true)
+        const res = await axios.get("http://localhost:9091/api/users/me", {
+          headers: {
+            Authorization: `Bearer ${token}`, // Include the token in the header
+          },
+        });
+
         // Fetch the current user data
-        const projectsres = await axios.get("http://localhost:9094/projects");
+        const projectsres = await axios.get(`http://localhost:9094/admin/${res.data.id}/projects`);
         if(projectsres.status === 200){
           console.log(projectsres.data)
           setProjects(projectsres.data)
