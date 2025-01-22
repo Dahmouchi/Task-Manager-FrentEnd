@@ -1,11 +1,10 @@
 import { MoreVertical, ChevronLast, ChevronFirst, LogOut } from "lucide-react";
-import { useContext, createContext, useState } from "react";
+import { useContext, createContext } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const SidebarContext = createContext();
 
-export default function Sidebar({ children ,user}) {
-  const [expanded, setExpanded] = useState(true);
+export default function Sidebar({ children ,user , setExpanded ,expanded}) {
   const navigate = useNavigate();
 
 
