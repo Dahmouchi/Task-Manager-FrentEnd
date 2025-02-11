@@ -62,7 +62,7 @@ const Dashboard = () => {
             htmlFor="project-dropdown"
             className="block mb-2 text-sm font-medium text-gray-900 "
           >
-            Select a Project:
+            Sélectionnez un projet :
           </label>
           <select
             id="project-dropdown"
@@ -71,7 +71,7 @@ const Dashboard = () => {
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
           >
             <option value="" disabled>
-              -- Select a Project --
+              -- Sélectionnez un projet : --
             </option>
             {projects.map((project) => (
               <option key={project.id} value={project.id}>
@@ -92,11 +92,10 @@ const Dashboard = () => {
               className="w-40 h-auto mx-auto mb-6"
             />
             <h1 className="text-3xl font-bold text-gray-800 mb-4">
-              Welcome to Task Manager
+            Bienvenue dans le gestionnaire de tâches
             </h1>
             <p className="text-lg text-gray-600">
-              Please select a project from the top menu to get started managing
-              your tasks effectively.
+            Veuillez sélectionner un projet dans le menu supérieur pour commencer à gérer efficacement vos tâches.
             </p>
           </div>
         </div>

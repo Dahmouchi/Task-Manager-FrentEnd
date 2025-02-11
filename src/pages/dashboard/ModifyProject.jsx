@@ -117,7 +117,7 @@ const ModifyProject = () => {
         <p className="text-gray-700 mb-4">{project?.description}</p>
 
         <div className="mb-8">
-          <h2 className="text-xl font-semibold mb-2">Users</h2>
+          <h2 className="text-xl font-semibold mb-2">Les utilisateurs</h2>
           <ul className="flex flex-wrap gap-4">
             {project.members?.map((user) => (
               <li key={user.id} className="mb-1">
@@ -144,7 +144,7 @@ const ModifyProject = () => {
         </div>
 
         <div className="mb-8">
-          <h2 className="text-xl font-semibold mb-2">Tasks</h2>
+          <h2 className="text-xl font-semibold mb-2">Tâches</h2>
           <ul className="flex flex-wrap gap-2">
             {task?.map((task) => (
               <li key={task.id} className="mb-4 w-72">
@@ -196,12 +196,12 @@ const ModifyProject = () => {
         </div>
       </div>
       <div className="mb-8 bg-white w-full rounded-lg shadow-md p-4 mt-4">
-          <h2 className="text-xl font-semibold mb-4">Add New Task</h2>
+          <h2 className="text-xl font-semibold mb-4">Ajouter une nouvelle tâche</h2>
           {message && <p className="mb-4">{message}</p>}
           <form onSubmit={handleTaskSubmit} className="space-y-4">
             <div>
               <label htmlFor="title" className="block font-medium mb-1">
-                Title
+                Titre
               </label>
               <input
                 type="text"
@@ -216,7 +216,7 @@ const ModifyProject = () => {
 
             <div>
               <label htmlFor="description" className="block font-medium mb-1">
-                Description
+                La description
               </label>
               <textarea
                 id="description"
@@ -230,7 +230,7 @@ const ModifyProject = () => {
             <div className="flex items-center gap-4">
               <div className="w-full">
                 <label htmlFor="idUser" className="block font-medium mb-1">
-                  Assign to User
+                Affecter à l'utilisateur
                 </label>
                 <select
                   id="idUser"
@@ -240,7 +240,7 @@ const ModifyProject = () => {
                   className="w-full border border-gray-300 rounded-md p-2"
                 >
                   <option value="" disabled>
-                    Select a user
+                  Sélectionnez un utilisateur
                   </option>
                   {project.members?.map((member) => (
                     <option key={member.id} value={member.id}>
@@ -251,7 +251,7 @@ const ModifyProject = () => {
               </div>
               <div className="w-full">
                 <label htmlFor="due_date" className="block font-medium mb-1">
-                  Due Date
+                Date d'expiration
                 </label>
                 <input
                   type="datetime-local"
@@ -269,7 +269,7 @@ const ModifyProject = () => {
               type="submit"
               className="w-full bg-blue-500 text-white rounded-md p-2 font-medium"
             >
-              Add Task
+              Ajouter une tâche
             </button>
           </form>
         </div>

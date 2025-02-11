@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {  BarChart3, Box, LayoutDashboard, PackagePlus, Settings } from "lucide-react";
+import {  BarChart3, BotMessageSquare, Box, ChartArea, LayoutDashboard, PackagePlus, Settings } from "lucide-react";
 import Sidebar, { SidebarItem } from "../components/Sidebar";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -78,39 +78,45 @@ const DashboardLayout = ({ children }) => {
       <SidebarItem
         icon={<LayoutDashboard />}
         active
-        text="Home"
+        text="Accueil"
         link="/dashboard"
       />
       <SidebarItem
         icon={<Box />}
         active
-        text="Projects"
+        text="Projets"
         link="/dashboard/projects"
       />
       <SidebarItem
         icon={<PackagePlus />}
         active
-        text="Add Project"
+        text="Ajouter Projet"
         link="/dashboard/addProject"
       />
       <SidebarItem
         icon={<BarChart3 />}
-        text="Tasks"
+        text="Tâche"
         link="/dashboard/tasks"
+      />
+       <SidebarItem
+        icon={<BotMessageSquare />}
+        text="ChatBot"
+        link="/dashboard/chat"
       />
       <hr className="my-3" />
       <SidebarItem
         icon={<Settings />}
-        text="Settings"
+        text="Paramètres"
         link="/dashboard/settings"
       />
+     
     </Sidebar>
   </div>
 
   {/* Main Content */}
-  <div className={`flex flex-1 ${expanded ? "ml-72" : "ml-20"} transition-all duration-300`}>
+  <div className={`flex flex-1 ${expanded ? "ml-72" : "ml-20"} transition-all duration-300 bg-slate-200`}>
   <main className="w-full">
-      <div className="mx-auto max-w-screen-2xl p-4 scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-gray-200">
+      <div className="mx-auto max-w-screen-2xl p-4  scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-gray-200">
         {children}
       </div>
     </main>

@@ -29,7 +29,7 @@ const SignUp = () => {
         formData
       );
       if (response.status === 200) {
-        toast.success("register user successfly");
+        toast.success("Utilisateur enregistré avec succès");
         navigate("/login");
         setFormData({
           username: "",
@@ -58,7 +58,7 @@ const SignUp = () => {
         <div className="w-full  bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-xl xl:p-0 dark:bg-slate-800 dark:border-slate-700">
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
             <h1 className="text-xl text-center font-bold leading-tight tracking-tight text-slate-900 md:text-2xl dark:text-white">
-              Sign Up
+            créer un nouveau compte
             </h1>
             <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
             <div>
@@ -85,11 +85,11 @@ const SignUp = () => {
                   htmlFor="email"
                   className="block mb-2 text-sm font-medium text-slate-900 dark:text-white"
                 >
-                  FirstName
+                  Nom
                 </label>
                 <input
                   type="text"
-                  placeholder="enter you firstName ..."
+                  placeholder="enter votre nom ..."
                   name="firstName"
                   value={formData.nom}
                   onChange={handleChange}
@@ -102,11 +102,11 @@ const SignUp = () => {
                   htmlFor="email"
                   className="block mb-2 text-sm font-medium text-slate-900 dark:text-white"
                 >
-                  LastName
+                  Prenom
                 </label>
                 <input
                   type="text"
-                  placeholder="enter your lastName ..."
+                  placeholder="enter votre prenom ..."
                   name="lastName"
                   value={formData.nom}
                   onChange={handleChange}
@@ -121,7 +121,7 @@ const SignUp = () => {
                   htmlFor="email"
                   className="block mb-2 text-sm font-medium text-slate-900 dark:text-white"
                 >
-                  Your Username
+                Username
                 </label>
                 <input
                   value={formData.username}
@@ -130,7 +130,7 @@ const SignUp = () => {
                   name="username"
                   id="username"
                   className="bg-slate-50 border border-slate-300 text-slate-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-slate-700 dark:border-slate-600 dark:placeholder-slate-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  placeholder="enter your username ..."
+                  placeholder="enter votre username ..."
                   required
                 />
               </div>
@@ -139,7 +139,7 @@ const SignUp = () => {
                   htmlFor="password"
                   className="block mb-2 text-sm font-medium text-slate-900 dark:text-white"
                 >
-                  Password
+                  Mot de pass
                 </label>
                 <input
                   value={formData.password}
@@ -158,13 +158,13 @@ const SignUp = () => {
                 type="submit"
                 className="w-full text-white bg-purple-800 hover:bg-purple-600 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
               >
-                Sign in
+                S'inscrire
               </button>
             </form>
             <p className="text-slate-200 text-center">
-            Already a member? {" "}
+            Déjà membre ?{" "}
               <a href="/login" className="font-semibold text-blue-600">
-              Log in
+              Se connecter
               </a>
             </p>
           </div>

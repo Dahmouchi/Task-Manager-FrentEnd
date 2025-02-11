@@ -11,6 +11,8 @@ import Projects from './pages/dashboard/Projects';
 import SignUp from './pages/SignUp';
 import AddProject from './pages/dashboard/AddProject';
 import ModifyProject from './pages/dashboard/ModifyProject';
+import Chat from './pages/dashboard/Chat';
+import Test from './pages/Test';
 const App = () => {
   return (
     <Router>
@@ -19,6 +21,7 @@ const App = () => {
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<SignUp />} />
       <Route path="/" element={<Home />} />
+      <Route path="/test" element={<Test />} />
       {/* Private Routes */}
       <Route
         path="/*"
@@ -32,6 +35,8 @@ const App = () => {
               <Route path="/dashboard/addProject" element={<AddProject/>} />
               <Route path="/dashboard/projects" element={<Projects/>} />
               <Route path="/dashboard/settings" element={<div>Settings Page</div>} />
+              <Route path="/dashboard/chat" element={<Chat />} />
+
             </Routes>
             </DashboardLayout>
           </PrivateRoute>

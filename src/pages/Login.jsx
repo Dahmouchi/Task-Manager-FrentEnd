@@ -48,7 +48,7 @@ const Login = () => {
         <div className="w-full  bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-slate-800 dark:border-slate-700">
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
             <h1 className="text-xl text-center font-bold leading-tight tracking-tight text-slate-900 md:text-2xl dark:text-white">
-              Sign in to your account
+            Connectez-vous à votre compte
             </h1>
             <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
               <div>
@@ -56,7 +56,7 @@ const Login = () => {
                   htmlFor="email"
                   className="block mb-2 text-sm font-medium text-slate-900 dark:text-white"
                 >
-                  Your Username
+                  Username
                 </label>
                 <input
                   value={form.email}
@@ -65,7 +65,7 @@ const Login = () => {
                   name="email"
                   id="email"
                   className="bg-slate-50 border border-slate-300 text-slate-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-slate-700 dark:border-slate-600 dark:placeholder-slate-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  placeholder="enter your username ..."
+                  placeholder="enter votre username ..."
                   required
                 />
               </div>
@@ -74,7 +74,7 @@ const Login = () => {
                   htmlFor="password"
                   className="block mb-2 text-sm font-medium text-slate-900 dark:text-white"
                 >
-                  Password
+                  Mot de pass
                 </label>
                 <input
                   value={form.password}
@@ -95,10 +95,10 @@ const Login = () => {
                 type="submit"
                 className="w-full text-white bg-purple-800 hover:bg-purple-600 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
               >
-                Sign in
+                Se connecter
               </button>
             </form>
-            <p className="text-slate-200 text-center">Don't have an account yet? <a href="/register" className="font-semibold text-blue-600">Create an account</a></p>
+            <p className="text-slate-200 text-center">Vous n'avez pas encore de compte ? <a href="/register" className="font-semibold text-blue-600">Créer un compte</a></p>
           </div>
         </div>
       </div>
